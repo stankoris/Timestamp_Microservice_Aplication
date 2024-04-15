@@ -9,20 +9,28 @@
     <h1>Timestamp Microservice Aplication</h1>
     <hr />
     <div class="container">
-      <h2>Example Usage:</h2>
       <ul>
-        <p>Try this one out: </p><li><a href="api/2015-12-25">2015-12-25</a></li>
-        <p>Or this : </p><li><a href="api/1451001600000">1451001600000</a></li>
+        <h2>Try this one out: </h2><li><a href="api/2015-12-25" onclick="fetchData('/api/2015-12-25'); return false;">2015-12-25</a></li>
+        <h2>Or this : </h2><li><a href="api/1451001600000" onclick="fetchData('/api/1451001600000'); return false;">1451001600000</a></li>
       </ul>
 
-      <h2>Example Output:</h2>
-      <p>
-        <code>{"unix":1451001600000, "utc":"Fri, 25 Dec 2015 00:00:00 GMT"}</code>
-      </p>
+      <h2>Output:</h2>
+      <p id="showApi"></p>
     </div>
+    <hr />
     <div class="footer">
-
+      <p>By: </p><a href="https://github.com/stankoris" target="_blank">https://github.com/stankoris</a>
     </div>
-
+    <hr />
+    <script>
+      function fetchData(url) {
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('showApi').innerHTML = `<code>{"unix": ${data.unix}, "utc": "${data.utc}"}</code>`;
+          })
+          .catch(error => console.error('Error:', error));
+      }
+    </script>
   </body>
 </html>
